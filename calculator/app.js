@@ -93,7 +93,7 @@ class Calculator {
     }
   }
 }
-
+const calc = new Calculator(subtotalTextElement, currentNumTextElement);
 const subtotalTextElement = document.querySelector("#subtotal");
 const currentNumTextElement = document.querySelector("#currentNumber");
 const changeSymbolButton = document.querySelector("#change-symbol-button");
@@ -131,5 +131,3 @@ operatorButtons.forEach((button) => {
     calc.updateDisplay();
   });
 });
-
-const calc = new Calculator(subtotalTextElement, currentNumTextElement);
