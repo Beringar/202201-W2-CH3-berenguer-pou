@@ -14,7 +14,7 @@ function getAndCheckInput() {
   while (value === undefined) {
     const input = prompt("Type a number:");
     if (input === null) return null;
-    if (isNaN(Number(input)) || input.trim() === "")
+    if (Number.isNaN(Number(input)) || input.trim() === "")
       input.trim() === "" // we handle empty values as invalid inputs because "" would throw 0! (but if user types 0 is OK.)
         ? alert("Value is empty! Please type a number.")
         : alert(`${input} is not a valid number. Please type it again!`);
