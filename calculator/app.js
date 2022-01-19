@@ -19,10 +19,14 @@ class Calculator {
       this.calculationsFinished = false;
     } else {
       if (value === "." && this.currentValue.includes(".")) return;
-      this.currentValue = this.currentValue + value;
+      this.currentValue += value;
     }
     if (this.currentValue === ".") this.currentValue = "0.";
-    if (this.currentValue[0] === "0" && !this.currentValue.includes(".") && this.currentValue.length === 2)
+    if (
+      this.currentValue[0] === "0" &&
+      !this.currentValue.includes(".") &&
+      this.currentValue.length === 2
+    )
       this.currentValue = this.currentValue.slice(1);
   }
 
@@ -47,7 +51,8 @@ class Calculator {
   }
 
   changeSymbol() {
-    if (parseFloat(this.currentValue) > 0) this.currentValue = "-" + this.currentValue;
+    if (parseFloat(this.currentValue) > 0)
+      this.currentValue = `-${this.currentValue}`;
     else this.currentValue = this.currentValue.replace("-", "");
   }
 
@@ -80,7 +85,9 @@ class Calculator {
   updateDisplay() {
     this.currentNumElement.innerText = this.currentValue;
     if (this.operator !== null && this.subtotalValue !== "") {
-      this.subtotalTextElement.innerText = `${parseFloat(this.subtotalValue)} ${this.operator}`;
+      this.subtotalTextElement.innerText = `${parseFloat(this.subtotalValue)} ${
+        this.operator
+      }`;
     } else {
       this.subtotalTextElement.innerText = "";
     }
