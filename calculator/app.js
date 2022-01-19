@@ -32,7 +32,7 @@ class Calculator {
 
   deleteNumber() {
     this.currentValue = this.currentValue.toString().slice(0, -1);
-    if (isNaN(this.currentValue)) this.currentValue = "0";
+    if (Number.isNaN(this.currentValue)) this.currentValue = "0";
     if (this.currentValue.length === 0) this.currentValue = "0";
   }
 
@@ -60,7 +60,7 @@ class Calculator {
     let result;
     const subtotalNum = parseFloat(this.subtotalValue);
     const currentNum = parseFloat(this.currentValue);
-    if (isNaN(subtotalNum) || isNaN(currentNum)) return;
+    if (Number.isNaN(subtotalNum) || Number.isNaN(currentNum)) return;
     switch (this.operator) {
       case "+":
         result = subtotalNum + currentNum;
