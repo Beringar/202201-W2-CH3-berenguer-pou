@@ -12,13 +12,24 @@ function getAndCheckInput() {
   // returns null is user escapes the prompt dialog or a number if input is a valid number
   let value;
   while (value === undefined) {
+    // eslint-disable-next-line no-alert
     const input = prompt("Type a number:");
-    if (input === null) return null;
-    if (isNaN(Number(input)) || input.trim() === "")
-      input.trim() === "" // we handle empty values as invalid inputs because "" would throw 0! (but if user types 0 is OK.)
-        ? alert("Value is empty! Please type a number.")
-        : alert(`${input} is not a valid number. Please type it again!`);
-    else value = Number(input);
+    if (Number.isNaN(input)) {
+      // eslint-disable-next-line no-alert
+      alert(`${input} is not a valid number. Please type it again!`);
+    } else {
+      switch (input) {
+        case null:
+          return null;
+        case "":
+          // eslint-disable-next-line no-alert
+          alert("Value is empty! Please type a number.");
+          break;
+        default:
+          value = Number(input);
+          break;
+      }
+    }
   }
   return value;
 }
@@ -51,9 +62,9 @@ function makeCalculations(arrNumbers) {
     }
     // print Results to the console
     for (let i = 0; i < results.length; i++) {
-      for (const key in results[i]) {
+      for (const [key, value] of Object.entries(results[i])) {
         console.log(
-          `Result of ${key} operation is: ${Number(results[i][key].toFixed(3))}`
+          `Result of ${key} operation is: ${Number(value.toFixed(3))}`
         );
       }
     }
