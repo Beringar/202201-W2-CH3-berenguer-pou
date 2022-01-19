@@ -19,16 +19,20 @@ class Calculator {
       this.calculationsFinished = false;
     } else {
       if (value === "." && this.currentValue.includes(".")) return;
-      this.currentValue = this.currentValue + value;
+      this.currentValue += value;
     }
     if (this.currentValue === ".") this.currentValue = "0.";
-    if (this.currentValue[0] === "0" && !this.currentValue.includes(".") && this.currentValue.length === 2)
+    if (
+      this.currentValue[0] === "0" &&
+      !this.currentValue.includes(".") &&
+      this.currentValue.length === 2
+    )
       this.currentValue = this.currentValue.slice(1);
   }
 
   deleteNumber() {
     this.currentValue = this.currentValue.toString().slice(0, -1);
-    if (isNaN(this.currentValue)) this.currentValue = "0";
+    if (Number.isNaN(this.currentValue)) this.currentValue = "0";
     if (this.currentValue.length === 0) this.currentValue = "0";
   }
 
@@ -47,7 +51,8 @@ class Calculator {
   }
 
   changeSymbol() {
-    if (parseFloat(this.currentValue) > 0) this.currentValue = "-" + this.currentValue;
+    if (parseFloat(this.currentValue) > 0)
+      this.currentValue = `-${this.currentValue}`;
     else this.currentValue = this.currentValue.replace("-", "");
   }
 
@@ -55,7 +60,7 @@ class Calculator {
     let result;
     const subtotalNum = parseFloat(this.subtotalValue);
     const currentNum = parseFloat(this.currentValue);
-    if (isNaN(subtotalNum) || isNaN(currentNum)) return;
+    if (Number.isNaN(subtotalNum) || Number.isNaN(currentNum)) return;
     switch (this.operator) {
       case "+":
         result = subtotalNum + currentNum;
@@ -80,21 +85,24 @@ class Calculator {
   updateDisplay() {
     this.currentNumElement.innerText = this.currentValue;
     if (this.operator !== null && this.subtotalValue !== "") {
-      this.subtotalTextElement.innerText = `${parseFloat(this.subtotalValue)} ${this.operator}`;
+      this.subtotalTextElement.innerText = `${parseFloat(this.subtotalValue)} ${
+        this.operator
+      }`;
     } else {
       this.subtotalTextElement.innerText = "";
     }
   }
 }
 
-const subtotalTextElement = document.querySelector("#subtotal");
-const currentNumTextElement = document.querySelector("#currentNumber");
+const subtotalEl = document.querySelector("#subtotal");
+const currentNumberEl = document.querySelector("#currentNumber");
 const changeSymbolButton = document.querySelector("#change-symbol-button");
 const equalsButton = document.querySelector("#equals-button");
 const clearButton = document.querySelector("#clear-button");
 const deleteButton = document.querySelector("#delete-button");
 const numberButtons = document.querySelectorAll("[data-number]");
 const operatorButtons = document.querySelectorAll("[data-operator]");
+const calc = new Calculator(subtotalEl, currentNumberEl);
 
 changeSymbolButton.addEventListener("click", () => {
   calc.changeSymbol();
@@ -124,5 +132,3 @@ operatorButtons.forEach((button) => {
     calc.updateDisplay();
   });
 });
-
-const calc = new Calculator(subtotalTextElement, currentNumTextElement);
