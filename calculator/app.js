@@ -93,15 +93,16 @@ class Calculator {
     }
   }
 }
-const calc = new Calculator(subtotalTextElement, currentNumTextElement);
-const subtotalTextElement = document.querySelector("#subtotal");
-const currentNumTextElement = document.querySelector("#currentNumber");
+
+const subtotalEl = document.querySelector("#subtotal");
+const currentNumberEl = document.querySelector("#currentNumber");
 const changeSymbolButton = document.querySelector("#change-symbol-button");
 const equalsButton = document.querySelector("#equals-button");
 const clearButton = document.querySelector("#clear-button");
 const deleteButton = document.querySelector("#delete-button");
 const numberButtons = document.querySelectorAll("[data-number]");
 const operatorButtons = document.querySelectorAll("[data-operator]");
+const calc = new Calculator(subtotalEl, currentNumberEl);
 
 changeSymbolButton.addEventListener("click", () => {
   calc.changeSymbol();
