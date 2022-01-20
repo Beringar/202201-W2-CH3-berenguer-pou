@@ -5,6 +5,7 @@ precourse ISDI Coders 2022-1
 */
 
 function getSquareRoot(number) {
+  if (typeof number !== "number") return null;
   return Math.sqrt(number);
 }
 
