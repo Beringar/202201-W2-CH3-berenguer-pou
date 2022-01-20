@@ -1,20 +1,52 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-restricted-globals */
 /*  
 proyecto Calculator-pro
 Berenguer Pou
 precourse ISDI Coders 2022-1
 */
+function sqrt(number) {
+  return Math.sqrt(number);
+}
+
+function getAndCheckInput() {
+  // returns null is user escapes the prompt dialog or a number if input is a valid number
+  let value;
+  while (value === undefined) {
+    // eslint-disable-next-line no-alert
+    const input = prompt("Type a number:");
+    if (Number.isNaN(input)) {
+      // eslint-disable-next-line no-alert
+      alert(`${input} is not a valid number. Please type it again!`);
+    } else {
+      switch (input) {
+        case null:
+          return null;
+        case "":
+          // eslint-disable-next-line no-alert
+          alert("Value is empty! Please type a number.");
+          break;
+        default:
+          value = Number(input);
+          break;
+      }
+    }
+  }
+  return value;
+}
 
 function isdiCalculatorPro() {
   const numList = [];
   let stopCalculations = false;
   let numListMsg = "Numbers in the list: ";
   console.log("Hello! ISDICalculator-Pro started!");
-  function getNewValues(moreNumbers) {
+  function getNewValues() {
+    let moreNumbers = true;
     while (moreNumbers) {
       const number = getAndCheckInput();
       if (number !== null) {
         numList.push(number);
-        console.log((numListMsg += number + " ")); // logs the list of accumulated valid numbers
+        console.log((numListMsg += `${number} `)); // logs the list of accumulated valid numbers
       } else if (numList.length === 0) {
         console.log("You have stopped ISDI Calculator!");
         moreNumbers = false;
@@ -25,30 +57,15 @@ function isdiCalculatorPro() {
       }
     }
   }
-  getNewValues(true);
+  getNewValues();
   while (!stopCalculations) {
-    confirm("Do you want to continue calculations with more numbers?")
-      ? getNewValues(true)
-      : (stopCalculations = true);
+    const answer = confirm(
+      "Do you want to continue calculations with more numbers?"
+    );
+    if (answer) getNewValues();
+    else stopCalculations = true;
   }
   console.log("Bye! End of program ISDI Calculator-pro :)");
-}
-
-function getAndCheckInput() {
-  // returns null is user escapes the prompt dialog or a number if input is a valid number
-  let value;
-  while (value === undefined) {
-    const input = prompt(
-      "Type a new number: (if you want to stop adding new numbers, press cancel button or ESC key"
-    );
-    if (input === null) return null;
-    else if (isNaN(Number(input)) || input.trim() === "")
-      input.trim() === "" // we handle empty values as invalid inputs because "" would throw 0! (but if user types 0 is OK.)
-        ? alert("Value is empty! Please type a number.")
-        : alert(`${input} is not a valid number. Please type it again!`);
-    else value = Number(input);
-  }
-  return value;
 }
 
 function makeCalculations(arrNumbers, numberListStr) {
@@ -88,10 +105,6 @@ function makeCalculations(arrNumbers, numberListStr) {
     }
   }
   console.log(`>>> End calculations for ${numberListStr} ...`);
-}
-
-function sqrt(number) {
-  return Math.sqrt(number);
 }
 
 isdiCalculatorPro();
