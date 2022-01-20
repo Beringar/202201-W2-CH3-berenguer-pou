@@ -40,7 +40,8 @@ function isdiCalculatorPro() {
   let stopCalculations = false;
   let numListMsg = "Numbers in the list: ";
   console.log("Hello! ISDICalculator-Pro started!");
-  function getNewValues(moreNumbers) {
+  function getNewValues() {
+    let moreNumbers = true;
     while (moreNumbers) {
       const number = getAndCheckInput();
       if (number !== null) {
@@ -56,12 +57,12 @@ function isdiCalculatorPro() {
       }
     }
   }
-  getNewValues(true);
+  getNewValues();
   while (!stopCalculations) {
     const answer = confirm(
       "Do you want to continue calculations with more numbers?"
     );
-    if (answer) getNewValues(true);
+    if (answer) getNewValues();
     else stopCalculations = true;
   }
   console.log("Bye! End of program ISDI Calculator-pro :)");
