@@ -4,7 +4,7 @@ Berenguer Pou
 precourse ISDI Coders 2022-1
 */
 
-function sqrt(number) {
+function getSquareRoot(number) {
   return Math.sqrt(number);
 }
 
@@ -44,7 +44,7 @@ function makeCalculations(arrNumbers) {
       console.log(
         `You just added one number! The square root of ${
           arrNumbers[0]
-        } is: ${sqrt(arrNumbers[0]).toFixed(3)}`
+        } is: ${getSquareRoot(arrNumbers[0]).toFixed(3)}`
       );
   } else {
     // calculates operations and prints results for any array of numbers
